@@ -1,55 +1,39 @@
-import React, { useState } from "react";
-import { Container, Form, ListGroup } from "react-bootstrap";
+import React, { useState } from 'react';
+import { Container } from 'react-bootstrap';
+import AddItemForm from './AddItemForm'; // Asegúrate de que la ruta sea correcta
+import ItemList from './ItemList'; // Asegúrate de que la ruta sea correcta
 
-// Crear el componente Home
+// Componente principal
 const Home = () => {
-  const [inputValue, setInputValue] = useState(""); // Estado para el valor del input
-  const [items, setItems] = useState([]); // Estado para los elementos de la lista
+  const [inputValue, setInputValue] = useState(""); 
+  const [items, setItems] = useState([]); 
 
   const handleAddItem = (e) => {
-    e.preventDefault(); // Evita que el formulario se envíe y recargue la página
+    e.preventDefault(); 
     if (inputValue.trim()) {
-      setItems([...items, inputValue.trim()]); // Agrega el nuevo elemento a la lista
-      setInputValue(""); // Limpia el campo de entrada
+      setItems([...items, inputValue.trim()]); 
+      setInputValue(""); 
     }
   };
 
   const handleRemoveItem = (index) => {
-    setItems(items.filter((_, i) => i !== index)); // Elimina el elemento en el índice dado
+    setItems(items.filter((_, i) => i !== index)); 
   };
 
   return (
     <Container className="mt-5">
-		<div className="text-center mt-5 text-secondary">
-			<h1>todos</h1>
-		</div>
-      <Form onSubmit={handleAddItem}>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Control
-            type="text"
-            placeholder="whats needs to be done?"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)} // Actualiza el valor del input
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') {
-                handleAddItem(e); // Agrega el item al presionar Enter
-              }
-            }}
-          />
-        </Form.Group>
-      </Form>
-      <ListGroup className="mt-3">
-        {items.map((item, index) => (
-          <ListGroup.Item
-            key={index}
-            className="d-flex justify-content-between align-items-center"
-          >
-            {item}
-            <i className="far fa-times-circle" onClick={() => handleRemoveItem(index)}
-			></i>
-          </ListGroup.Item>
-        ))}
-      </ListGroup>
+      <div className="text-center mt-5 text-secondary">
+        <h1>Todos</h1>
+      </div>
+      <AddItemForm 
+        inputValue={inputValue} 
+        setInputValue={setInputValue} 
+        handleAddItem={handleAddItem} 
+      />
+      <ItemList 
+        items={items} 
+        handleRemoveItem={handleRemoveItem} 
+      />
     </Container>
   );
 };
