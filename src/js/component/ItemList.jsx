@@ -1,5 +1,5 @@
-import React from 'react';
-import { ListGroup } from 'react-bootstrap';
+import React from "react";
+import { ListGroup } from "react-bootstrap";
 
 // Componente para la lista de ítems
 const ItemList = ({ items, handleRemoveItem }) => {
@@ -11,7 +11,10 @@ const ItemList = ({ items, handleRemoveItem }) => {
           className="d-flex justify-content-between align-items-center"
         >
           {item}
-          <i className="far fa-times-circle" onClick={() => handleRemoveItem(index)}></i>
+          <i
+            className="far fa-times-circle"
+            onClick={() => handleRemoveItem(index)}
+          ></i>
         </ListGroup.Item>
       ))}
     </ListGroup>
